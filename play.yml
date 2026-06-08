@@ -1,0 +1,7 @@
+# this is the playbook for monitoring role
+- name: Setup Monitoring Stack
+  hosts: all_servers
+  become: yes
+  roles:
+    - monitoring_role 
+  

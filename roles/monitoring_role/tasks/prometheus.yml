@@ -1,0 +1,35 @@
+# Install Prometheus on target machines
+# This file is imported in the main.yml file of monitoring_role.
+
+#SPDX-License-Identifier: MIT-0
+---
+
+- name: Download Prometheus package
+  get_url:
+    url: "{{ prometheus_download_url }}"
+    dest: "/tmp/{{ prometheus_tar }}"
+
+- name: Extract Prometheus package
+  unarchive:
+    src: "/tmp/{{ prometheus_tar }}"
+    dest: "{{ prometheus_grafana_dir }}"
+    remote_src: yes
+    creates: "{{ prometheus_grafana_dir }}/{{ prometheus_extracted_dir }}"
+
+
+- name: Set ownership for Prometheus directory
+  file:
+    path: "{{ prometheus_grafana_dir }}/{{ prometheus_extracted_dir }}"
+    owner: "{{ prometheus_user }}"
+    group: "{{ prometheus_group }}"
+    recurse: yes
+
+- name: Configure Prometheus
+  template:
+    src: "prometheus.yml.j2"
+    dest: "{{ prometheus_grafana_dir }}/{{ prometheus_extracted_dir }}/prometheus.yml"
+    owner: "{{ prometheus_user }}"
+    group: "{{ prometheus_group }}"
+    mode: '0644'
+  notify:
+    - Restart Prometheus

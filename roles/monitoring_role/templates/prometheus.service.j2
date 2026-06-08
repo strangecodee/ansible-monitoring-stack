@@ -1,0 +1,20 @@
+# Prometheus systemd service file
+
+[Unit]
+Description=Prometheus Monitoring System and Time Series Database
+After=network.target
+
+[Service]
+Type=simple
+
+User={{ prometheus_user }}
+Group={{ prometheus_group }}
+
+ExecStart={{ prometheus_grafana_dir }}/{{ prometheus_extracted_dir }}/prometheus \
+--config.file={{ prometheus_grafana_dir }}/{{ prometheus_extracted_dir }}/prometheus.yml
+
+Restart={{ service_restart_policy }}
+RestartSec={{ service_restart_delay }}
+
+[Install]
+WantedBy=multi-user.target

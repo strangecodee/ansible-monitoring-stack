@@ -1,0 +1,62 @@
+#SPDX-License-Identifier: MIT-0
+---
+# This file installs prerequisite packages
+# required for Prometheus and Grafana setup.
+
+
+# It is for both Ubuntu and CentOS machines. The tasks are conditional based on the OS family.
+- name: Install prerequisite packages on Ubuntu machines
+  apt:
+    name:
+      - wget
+      - tar
+    state: present
+    update_cache: yes
+  when: ansible_facts['os_family'] == "Debian"
+
+
+- name: Install prerequisite packages on CentOS machines
+  yum:
+    name:
+      - wget
+      - tar
+    state: present
+  when: ansible_facts['os_family'] == "RedHat"
+
+# Create prometheus and grafana users and groups, and the common installation directory. This is required for both Ubuntu and CentOS machines.
+- name: Create prometheus group
+  group:
+    name: "{{ prometheus_group }}"
+    state: present
+
+
+- name : Create prometheus user
+  user:
+    name: "{{ prometheus_user }}"
+    group: "{{ prometheus_group }}"
+    create_home: no
+    shell: /sbin/nologin
+    system: yes
+
+
+- name: Create grafana group
+  group:
+    name: "{{ grafana_group }}"
+    state: present
+
+- name : Create grafana user
+  user:
+    name: "{{ grafana_user }}"
+    group: "{{ grafana_group }}"
+    create_home: no
+    shell: /sbin/nologin
+    system: yes
+  
+
+# Create common installation directory for Prometheus and Grafana
+- name: Create directory for Prometheus and Grafana
+  file:
+    path: "{{ tool_dir }}"
+    state: directory
+    mode: '0755'
+

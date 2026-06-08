@@ -1,0 +1,27 @@
+# Prometheus Configuration File
+# Generated using Ansible Jinja2 Template
+
+global:
+  scrape_interval: {{ prometheus_scrape_interval }}
+
+# Scrape Configurations
+
+scrape_configs:
+
+  # Prometheus Self Monitoring
+
+  - job_name: 'prometheus'
+
+    static_configs:
+      - targets:
+          - '{{ prometheus_target }}'
+
+# Alerting Configuration
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: []
+
+# Rule Files
+rule_files: []

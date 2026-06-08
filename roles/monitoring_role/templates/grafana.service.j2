@@ -1,0 +1,21 @@
+[Unit]
+Description=Grafana Analytics and Monitoring Platform
+After=network.target
+
+[Service]
+Type=simple
+
+User={{ grafana_user }}
+Group={{ grafana_group }}
+
+WorkingDirectory={{ prometheus_grafana_dir }}/{{ grafana_extracted_dir }}
+
+ExecStart={{ prometheus_grafana_dir }}/{{ grafana_extracted_dir }}/bin/grafana-server \
+--homepath={{ prometheus_grafana_dir }}/{{ grafana_extracted_dir }} \
+--config={{ prometheus_grafana_dir }}/{{ grafana_extracted_dir }}/conf/grafana.ini
+
+Restart={{ service_restart_policy }}
+RestartSec={{ service_restart_delay }}
+
+[Install]
+WantedBy=multi-user.target

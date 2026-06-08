@@ -1,0 +1,46 @@
+#SPDX-License-Identifier: MIT-0
+---
+# vars file for roles/monitoring_role
+
+# Common Installation Directory
+tool_dir: "/opt/monitoring"
+
+
+# Prometheus Variables
+prometheus_version: "2.31.1"
+
+prometheus_tar: "prometheus-{{ prometheus_version }}.linux-amd64.tar.gz"
+
+prometheus_download_url: "https://github.com/prometheus/prometheus/releases/download/v{{ prometheus_version }}/{{ prometheus_tar }}"
+
+prometheus_extracted_dir: "prometheus-{{ prometheus_version }}.linux-amd64"
+
+prometheus_service_name: "prometheus"
+
+prometheus_user: "prometheus"
+
+prometheus_group: "prometheus"
+
+# Grafana Variables
+
+grafana_version: "8.5.2"
+
+grafana_tar: "grafana-{{ grafana_version }}.linux-amd64.tar.gz"
+
+grafana_download_url: "https://dl.grafana.com/oss/release/{{ grafana_tar }}"
+
+grafana_extracted_dir: "grafana-{{ grafana_version }}"
+
+grafana_service_name: "grafana"
+
+grafana_user: "grafana"
+
+grafana_group: "grafana"
+
+# Derived Variables
+prometheus_grafana_dir: "{{ tool_dir }}"
+
+# Service file paths
+prometheus_service_file: "/etc/systemd/system/prometheus.service"
+
+grafana_service_file: "/etc/systemd/system/grafana.service"

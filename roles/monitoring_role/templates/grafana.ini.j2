@@ -1,0 +1,48 @@
+# Grafana Configuration File
+# Generated using Ansible Jinja2 Template
+
+[server]
+# Protocol
+protocol = http
+
+# Grafana Port
+http_port = {{ grafana_port }}
+
+# Domain
+domain = localhost
+
+# Root URL
+root_url = %(protocol)s://%(domain)s:%(http_port)s/
+
+# Security Configuration
+[security]
+
+# Admin Credentials
+admin_user = {{ grafana_admin_user }}
+
+admin_password = {{ grafana_admin_password }}
+
+# Users Configuration
+
+[users]
+# Allow User Sign Up
+allow_sign_up = false
+
+# Logging Configuration
+[log]
+
+# Log Level
+level = {{ log_level }}
+
+
+# Paths Configuration
+[paths]
+
+# Data Path
+data = {{ prometheus_grafana_dir }}/{{ grafana_extracted_dir }}/data
+
+# Logs Path
+logs = {{ prometheus_grafana_dir }}/{{ grafana_extracted_dir }}/logs
+
+# Plugins Path
+plugins = {{ prometheus_grafana_dir }}/{{ grafana_extracted_dir }}/plugins

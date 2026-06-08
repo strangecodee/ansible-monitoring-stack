@@ -1,0 +1,17 @@
+#SPDX-License-Identifier: MIT-0
+---
+# Main task file for monitoring_role
+# This file imports all task modules required
+# for Prometheus and Grafana setup.
+
+- name: Import prerequisite tasks
+  import_tasks: prerequisites.yml
+
+- name: Import Prometheus tasks
+  import_tasks: prometheus.yml
+
+- name: Import Grafana tasks
+  import_tasks: grafana.yml
+
+- name: Import service tasks
+  import_tasks: service.yml
