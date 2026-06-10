@@ -1,5 +1,5 @@
 [ubuntu]
-ubuntu-server ansible_host=43.205.103.230 ansible_user=ubuntu ansible_python_interpreter=/usr/bin/python3
+ubuntu-server ansible_host=13.201.18.19 ansible_user=ubuntu ansible_python_interpreter=/usr/bin/python3
 
 
 [all_servers:children]
