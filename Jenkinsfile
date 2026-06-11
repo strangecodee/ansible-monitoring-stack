@@ -1,7 +1,7 @@
 
 @Library('monitoring-shared-library') _
 
-node('Built-In Node') {
+node('master') {
 
     def props = readProperties file: 'prod.properties'
 
