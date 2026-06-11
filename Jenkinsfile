@@ -1,4 +1,4 @@
-```groovy id="xjlwm2"
+
 @Library('monitoring-shared-library') _
 
 node('Built-In Node') {
@@ -24,4 +24,3 @@ node('Built-In Node') {
         KEEP_APPROVAL_STAGE: props.KEEP_APPROVAL_STAGE.toBoolean()
     )
 }
-```
