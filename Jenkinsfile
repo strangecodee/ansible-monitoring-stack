@@ -3,11 +3,17 @@
 
 node('master') {
 
+    checkout scm
+
+    sh 'pwd'
+
+    sh 'ls -la'
+
     def props = readProperties file: 'prod.properties'
 
     ansibleDeploy(
 
-        REPO_URL: 'https://github.com/strangecodee/ansible-shared-library.git',
+        REPO_URL: 'https://github.com/strangecodee/ansible-monitoring-stack.git',
 
         BRANCH: props.BRANCH ?: 'main',
 
@@ -24,3 +30,4 @@ node('master') {
         KEEP_APPROVAL_STAGE: props.KEEP_APPROVAL_STAGE.toBoolean()
     )
 }
+
